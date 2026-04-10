@@ -69,3 +69,48 @@ python3 -m http.server 8000
 2. Connect MetaMask to the **Hardhat Localhost** network (RPC: `http://127.0.0.1:8545`, Chain ID: `31337`).
 3. Import **Account #0** from the Hardhat terminal to act as the Administrator.
 4. Import **Account #1** to act as a Student.
+
+```
+for Running it locally
+```
+How to run this project locally:
+
+1. Clone and Install Dependencies
+Open your terminal and run:
+Bash
+
+git clone https://github.com/YOUR_USERNAME/course-registration-ledger.git
+cd course-registration-ledger
+npm install
+
+2. Start the Local Blockchain
+In the same terminal, spin up the local Hardhat node to act as the PoA network:
+Bash
+
+npx hardhat node
+
+(Leave this terminal running. It will generate 20 test wallets with fake ETH).
+
+3. Deploy the Smart Contract
+Open a second terminal inside the course-registration-ledger folder and deploy the contract to the local network:
+Bash
+
+npx hardhat run scripts/deploy.js --network localhost
+
+4. Start the Frontend Application
+Open a third terminal, navigate to the frontend folder, and start a local web server:
+Bash
+
+cd frontend
+python3 -m http.server 8000
+
+5. Test the Application
+
+    Open your browser to http://localhost:8000.
+
+    Open the MetaMask extension and switch to the Localhost 8545 network (RPC: http://127.0.0.1:8545, Chain ID: 31337).
+
+    Import Account #0 from the Hardhat terminal to act as the University Admin (Registrar) to add courses.
+
+    Import Account #1 from the Hardhat terminal to act as a Student to enroll in courses.
+    (Note: You may need to clear your MetaMask Activity Tab Data in advanced settings if you have used Localhost previously).
