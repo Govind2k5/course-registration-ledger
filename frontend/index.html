@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration Ledger</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .wallet-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 5px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .section {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .admin-section {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .student-section {
+            border-left: 5px solid #2ecc71;
+        }
+
+        .course-list {
+            margin-top: 20px;
+        }
+
+        .course-card {
+            background: white;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .error-log {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>📚 Decentralized Course Ledger</h1>
+
+        <div class="wallet-info">
+            <button id="connectBtn">Connect MetaMask</button>
+            <p id="walletAddress">Not connected</p>
+            <p id="roleStatus"></p>
+        </div>
+        <div id="errorLog" class="error-log"></div>
+
+        <div class="section admin-section" id="adminPanel" style="display: none;">
+            <h2>🛠️ Admin: Add New Course</h2>
+            <input type="text" id="courseName" placeholder="Course Name (e.g., Blockchain 101)">
+            <input type="number" id="courseCapacity" placeholder="Seat Capacity (e.g., 50)">
+            <button id="addCourseBtn">Add Course to Ledger</button>
+        </div>
+
+        <div class="section student-section" id="studentPanel" style="display: none;">
+            <h2>🎓 Student Actions</h2>
+            <button id="registerStudentBtn" style="background-color: #2ecc71;">Initialize Student Profile</button>
+            <p style="font-size: 12px; color: #666;">(Must click this once before enrolling)</p>
+
+            <div style="margin-top: 15px;">
+                <input type="number" id="enrollCourseId" placeholder="Course ID to Enroll/Drop">
+                <button id="enrollBtn">Enroll in Course</button>
+                <button id="dropBtn" style="background-color: #e67e22;">Drop Course</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📜 Active Course Ledger</h2>
+            <button id="refreshCoursesBtn">Refresh Ledger</button>
+            <div id="coursesContainer" class="course-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
